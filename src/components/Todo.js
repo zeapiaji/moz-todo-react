@@ -1,4 +1,8 @@
 import React, {useState} from "react";
+import React, {useRef, useState} from "react";
+
+const editFieldRef = useRef(null);
+const editButtonRef = useReff(null);
 
 export default function Todo(props) {
   const [isEditing, setEditing] = useState(false);
@@ -28,13 +32,16 @@ export default function Todo(props) {
           className="todo-text" 
           value={newName}
           onChange={handleChange}
+          ref={editFieldRef}
         />
       </div>
       <div className="btn-group">
         <button 
           type="button" 
           className="btn todo-cancel"
-          onClick={() => setEditing(false)}>
+          onClick={() => setEditing(false)}
+          ref={editButtonRef}
+        >
           Cancel
           <span className="visually-hidden">renaming {props.name}</span>
         </button>
@@ -53,7 +60,8 @@ export default function Todo(props) {
           id={props.id} 
           type="checkbox" 
           defaultChecked={props.completed}
-          onChange={() => props.toggleTaskCompleted(props.id)} />
+          onChange={() => props.toggleTaskCompleted(props.id)} 
+        />
           <label className="todo-label" htmlFor={props.id}>
             {props.name}
           </label>
